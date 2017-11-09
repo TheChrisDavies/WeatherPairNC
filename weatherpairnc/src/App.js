@@ -47,19 +47,19 @@ class App extends Component {
     if(this.state.loading === false){
     let weatherArray = Array.from(this.state.weatherInfo.list);
     // console.log('Weather Array ', weatherArray);
-    for(let i = 0; i < 40; i++)
-    {
-      console.log(weatherArray[i].main.temp)
-    }
+    // for(let i = 0; i < 40; i++)
+    // {
+    //   console.log(weatherArray[i].main.temp)
+    // }
+  //   let weatherJSX = copy.map((tempz, index) => {
+  //     return (
+  //     <div>
+  //         <h3>{tempz.main.temp}</h3>
+  //     </div>
+  //     )
+  // });
   }
-    // let weatherJSX = copy.map((tempz, index) => {
-    //     return (
-    //     <div>
-    //         <h3>{tempz.main.temp}</h3>
-    //     </div>
-    //     )
-    // });
-
+    
 
     return (
       <div className="App">
