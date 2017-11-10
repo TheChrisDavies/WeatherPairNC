@@ -1,93 +1,80 @@
 import React, { Component } from 'react';
 import './App.css';
-import * as d3 from "d3";
+import {BarChart, Bar, ReferenceLine, XAxis, YAxis, CartesianGrid, Tooltip, Legend} from 'recharts';
+
+let weatherJSX;
+let temperatures = {}
 
 class Chart extends Component {
 
-  // var margin = {top: 20, right: 20, bottom: 70, left: 40},
-  // width = 600 - margin.left - margin.right,
-  // height = 300 - margin.top - margin.bottom;
 
-// Parse the date / time
-// var	parseDate = d3.time.format("%Y-%m").parse;
-
-// var x = d3.scale.ordinal().rangeRoundBands([0, width], .05);
-
-// var y = d3.scale.linear().range([height, 0]);
-
-// var xAxis = d3.svg.axis()
-//   .scale(x)
-//   .orient("bottom")
-//   .tickFormat(d3.time.format("%Y-%m"));
-
-// var yAxis = d3.svg.axis()
-//   .scale(y)
-//   .orient("left")
-//   .ticks(10);
-
-// var svg = d3.select("body").append("svg")
-//   .attr("width", width + margin.left + margin.right)
-//   .attr("height", height + margin.top + margin.bottom)
-// .append("g")
-//   .attr("transform", 
-//         "translate(" + margin.left + "," + margin.top + ")");
-
-// d3.csv("bar-data.csv", function(error, data) {
-
-//   data.forEach(function(d) {
-//       d.date = parseDate(d.date);
-//       d.value = +d.value;
-//   });
-
-// x.domain(data.map(function(d) { return d.date; }));
-// y.domain([0, d3.max(data, function(d) { return d.value; })]);
-
-// svg.append("g")
-//     .attr("class", "x axis")
-//     .attr("transform", "translate(0," + height + ")")
-//     .call(xAxis)
-//   .selectAll("text")
-//     .style("text-anchor", "end")
-//     .attr("dx", "-.8em")
-//     .attr("dy", "-.55em")
-//     .attr("transform", "rotate(-90)" );
-
-// svg.append("g")
-//     .attr("class", "y axis")
-//     .call(yAxis)
-//   .append("text")
-//     .attr("transform", "rotate(-90)")
-//     .attr("y", 6)
-//     .attr("dy", ".71em")
-//     .style("text-anchor", "end")
-//     .text("Value ($)");
-
-// svg.selectAll("bar")
-//     .data(data)
-//   .enter().append("rect")
-//     .style("fill", "steelblue")
-//     .attr("x", function(d) { return x(d.date); })
-//     .attr("width", x.rangeBand())
-//     .attr("y", function(d) { return y(d.value); })
-//     .attr("height", function(d) { return height - y(d.value); });
-
-// });
 
 
     render(){
-        //add an if statement for if still loading
+
+        if (Array.isArray(this.props.weatherArray)) {
+            let copy = this.props.weatherArray;
+            weatherJSX = copy.map((individualTemp, index) => {
+                temperatures.push(individualTemp.main.temp)
+                //need to add time here
+            })
+            createChart();
+        }
+
+
+        function Temp(temp, date) {
+            this.temperature = temp;
+            // this.date = 
+        }
+
+        // var myFather = new person("John", "Doe", 50, "blue");
+        // var myMother = new person("Sally", "Rally", 48, "green");
+
+        function createChart(){
+            // const {BarChart, Bar, ReferenceLine, XAxis, YAxis, CartesianGrid, Tooltip, Legend} = Recharts;
+            const data = [
+                //   {name: 'Page A', uv: 4000, pv: 2400, amt: 2400},
+                //   {name: 'Page B', uv: -3000, pv: 1398, amt: 2210},
+                //   {name: 'Page C', uv: -2000, pv: -9800, amt: 2290},
+                //   {name: 'Page D', uv: 2780, pv: 3908, amt: 2000},
+                //   {name: 'Page E', uv: -1890, pv: 4800, amt: 2181},
+                //   {name: 'Page F', uv: 2390, pv: -3800, amt: 2500},
+                //   {name: 'Page G', uv: 3490, pv: 4300, amt: 2100},
+                weatherJSX
+            ];
+            // const SimpleBarChart = React.createClass({
+            //     render () {
+            //       return (
+
+            //     );
+            //   }
+            // })
+            
+            // ReactDOM.render(
+            //   <SimpleBarChart />,
+            //   document.getElementById('container')
+            // );
+        }
+
+
         
-        let copy = Array.from(this.props.weatherArray);
-        console.log(copy)
-        // let weatherJSX = copy.map((individualTemp, index) => {
-        //   return (
-        //   <div>
-        //       <h3>{individualTemp.main.temp}</h3>
-        //   </div>
-        //   )
-    //   });
+
+
         return(
             <div>
+                <div id="container">
+                <BarChart width={600} height={300} data={data}
+                        margin={{top: 5, right: 30, left: 20, bottom: 5}}>
+                   <XAxis dataKey="name"/>
+                   <YAxis/>
+                   <CartesianGrid strokeDasharray="3 3"/>
+                   <Tooltip/>
+                   <Legend />
+                   <ReferenceLine y={0} stroke='#000'/>
+                   <Bar dataKey="pv" fill="#8884d8" />
+                   <Bar dataKey="uv" fill="#82ca9d" />
+                  </BarChart>
+                </div>
             </div>
         )
     }
