@@ -74,21 +74,21 @@ class App extends Component {
 
     return (
       <div className="App">
+        <h1>Forecast comparison tool</h1>
         <form onSubmit={(e) => {this.getWeather(e)}}>
-          <input type="text" name="city" id="city"  />
+          <input type="text" name="city" id="city" placeholder="enter first city" />
           <select id="country">
             <option value="ca">Canada</option>
             <option value="us">US</option>
           </select>
-          <input type="submit" value="Submit"/>
         </form>
         <form onSubmit={(e) => {this.getWeather(e)}}>
-          <input type="text" name="city" id="city2"  />
+          <input type="text" name="city" id="city2" placeholder="enter second city" />
           <select id="country2">
             <option value="ca">Canada</option>
             <option value="us">US</option>
           </select>
-          <input type="submit" value="Submit"/>
+          <input id="submit" type="submit" value="Submit"/>
         </form>
         <Chart weatherArray={this.state.loading ? false : weatherArray} city1={this.state.loading ? false : city1} weatherArray2={this.state.loading2 ? false : weatherArray2} city2={this.state.loading ? false : city2}/>
       </div>
